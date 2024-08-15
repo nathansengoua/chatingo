@@ -1,7 +1,8 @@
 <?php
-include '.../includes/db.php';
+include '../includes/db.php';
+include '../includes/auth.php'; 
 
-if (isLoggedIn()) {
+if (isloggedin()) {
     $chat_id = $_POST['chat_id'];
     $message = $_POST['message'];
 

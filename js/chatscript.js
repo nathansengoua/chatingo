@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`php/search.php?query=${query}`);
             const users = await response.json();
             usersList.style.display = 'flex';
-            usersList.innerHTML = users.map(user => `<li data-user-id="${user.id}">${user.username}</li>`).join('');
+            usersList.innerHTML = users.map(user => `<li data-user-id="${user.userid}">${user.username}</li>`).join('');
         } else {
             usersList.innerHTML = '';
         }
@@ -21,13 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     usersList.addEventListener('click', async (e) => {
         if (e.target.tagName === 'LI') {
-            const otherUserId = e.target.dataset.userid;
+            const otherUserId = e.target.dataset.userId;
+            console.log('otherid',e.target.dataset);
+            const formdata = new FormData();
+            formdata.append('other_user_id',otherUserId);
             
             try {
                 const response = await fetch('includes/start_chat.php', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ other_user_id: otherUserId })
+                    body: formdata
                 });
     
                 if (!response.ok) {
@@ -48,15 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
+    
     messageForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
         const message = messageInput.value;
         if (message && currentChatId) {
-            const response = await fetch('../php/sendmessage.php', {
+            const formdata = new FormData();
+            formdata.append('chat_id', currentChatId );
+            formdata.append('message', message);
+            console.log('chatid', formdata);
+            const response = await fetch('php/sendmessage.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: currentChatId, message })
+                body: formdata
             });
             const data = await response.json();
             if (data.status === 'success') {
@@ -68,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchMessages() {
         if (currentChatId) {
-            const response = await fetch(`../php/fetchmessages.php?chat_id=${currentChatId}`);
+            const response = await fetch(`php/fetchmessages.php?chat_id=${currentChatId}`);
             const messages = await response.json();
             messagesDiv.innerHTML = messages.map(msg => `<div><strong>${msg.username}</strong>: ${msg.message}</div>`).join('');
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
