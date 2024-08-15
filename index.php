@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Login | Signup';
-$pageCss = 'loginstyle.css';
-$pageJs = 'loginscript.js';
+$pageCss = 'login_signupstyles.css';
+$pageJs = 'loginsignupswap.js';
 include 'includes/header.php';
 ?>
 <body>
@@ -9,8 +9,8 @@ include 'includes/header.php';
         <div class="logo"><span>chatingo</span></div>
         <nav>
             <ul>
-                <li><a href="">About us</a></li>
-                <li><a href="\signup.html">Signup</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#" id="signuplink">Signup</a></li>
             </ul>
         </nav>
     </header>
@@ -22,7 +22,7 @@ include 'includes/header.php';
 				<div class="typing-container">
 					<p id="typing-text"></p>
 				</div>
-				<form class="loginform" action="loginsubmit.php" method="post">
+				<form class="loginform" >
 					<div class="input-wrapper">
 						
 						<input type="text" id="usr"  name="username" required>
@@ -48,7 +48,7 @@ include 'includes/header.php';
 			</div>
 			<div class="signup container" id="signup-wrapper">
 				<span class="signuplogo">sign up</span>
-				<form class="signupform" action="#" method="post">
+				<form class="signupform">
 					<div class="names">
 						<div class="ffiled input">					
 							<label for="fname">First name</label>
@@ -77,7 +77,7 @@ include 'includes/header.php';
 					</div>
 					<div class="input">
 					<label for="pimg">Profile Image</label>
-					<input type="file" name="pimg" id="pimg">
+					<input type="file" name="pimg" id="pimg" accept=".jpg, .jpeg, .png, .gif" required>
 					</div>
 					<div class="button-container">
 						<button type="submit">Sign up</button>
@@ -94,3 +94,5 @@ include 'includes/header.php';
     
 <?php include 'includes/footer.php' ?>
 <script src="js/showpassword.js" ></script>
+<script src="js/login.js" ></script>
+<script src="js/singup.js" ></script>
