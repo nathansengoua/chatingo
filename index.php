@@ -1,7 +1,8 @@
 <?php
 $pageTitle = 'Login | Signup';
 $pageCss = 'login_signupstyles.css';
-$pageJs = 'loginsignupswap.js';
+$pageJs = 'loginsignupscript.js';
+$mediaqueryCSS='login_signup_responsive.css';
 include 'includes/header.php';
 ?>
 <body>
@@ -16,15 +17,13 @@ include 'includes/header.php';
     </header>
 <section>
         <div class="main container">            
-			<div class="erro-msg"> wrong username or password</div>
-
 			<div class="login container" id="login-wrapper">
+				<div class="erro-msg">hiii</div>
 				<div class="typing-container">
 					<p id="typing-text"></p>
 				</div>
 				<form class="loginform" >
 					<div class="input-wrapper">
-						
 						<input type="text" id="usr"  name="username" required>
 						<label for="usr" class="label">username</label>
 						<i class="fa fa-user" aria-hidden="true"></i>
@@ -33,7 +32,7 @@ include 'includes/header.php';
 						<input type="password" id="pswd" name="password" required>
 						<label for="pswd" class="label">Password</label>
 						<i class="fa fa-key" aria-hidden="true"></i>
-						<i class="fa fa-eye" id="togglePassword" aria-hidden="true"></i>
+						<i class="fa fa-eye" id="togglePassword1" aria-hidden="true"></i>
 					</div>
 					<button type="submit">Login</button>
 								
@@ -43,10 +42,11 @@ include 'includes/header.php';
 					<a href="http://"><i class="fa fa-google" aria-hidden="true"></i></a>
 					
 				</div>
-				<div id="signuplink"><p>i don't have an acount<p></div>            
+				<div class="lbox">Don't have an acount ? <span id="signuplink">signup</span></div>            
 
 			</div>
 			<div class="signup container" id="signup-wrapper">
+				<div class="erro-msg"></div>
 				<span class="signuplogo">sign up</span>
 				<form class="signupform">
 					<div class="names">
@@ -73,7 +73,7 @@ include 'includes/header.php';
 						<label for="password">Password</label>
 						<input type="password" name="password" id="password" required>
 						<i class="fa fa-lock" aria-hidden="true"></i>
-						<i class="fa fa-eye" aria-hidden="true"></i>					
+						<i class="fa fa-eye" id="togglePassword2"aria-hidden="true"></i>					
 					</div>
 					<div class="input">
 					<label for="pimg">Profile Image</label>
@@ -83,16 +83,19 @@ include 'includes/header.php';
 						<button type="submit">Sign up</button>
 					</div>
 				</form>
-				<div id="signinlink"><p>i already have an acount<p></div>
 				
+				<div class="sbox">already have an acount ? <span id="signinlink">Login</span></div> 
 			</div>
 
-        </div>
-                
+        </div>              
             
     </section>
     
 <?php include 'includes/footer.php' ?>
-<script src="js/showpassword.js" ></script>
 <script src="js/login.js" ></script>
 <script src="js/singup.js" ></script>
+<footer style="text-align: center;">
+        <p>&copy; <?php echo date('Y'); ?> My Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

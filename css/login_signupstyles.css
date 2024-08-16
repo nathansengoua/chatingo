@@ -16,15 +16,16 @@ header {
     top: 0;
     width: 100%;
     background-color: blue;
-    color: #fff;
+    color: --secondary-color;
     z-index: 1000; 
 }
 
 .logo span {
-    font-size: 24px;
+    font-size: 26px;
     text-transform: uppercase;
+    color: var(--secondary-color);
     font-weight: bold;
-    padding: 15px;
+    margin-left: 15px;
 }
 
 nav {
@@ -49,14 +50,18 @@ nav ul li a {
     text-align: center;
     text-decoration: none;
     color: #fff;
+    transition: color 0.3s;
 }
+nav ul li a:hover {
+    background-color: var(--primary-color);
+    }
 
 section {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('../img/bgpic.jpg');
+    background-image: url('../img/bgpic.png');
     background-repeat: no-repeat;
     background-size: cover; 
     background-attachment: fixed;
@@ -67,27 +72,34 @@ section {
     margin: 0;
     padding: 0;
     justify-content: center;
-    align-items: center; 
-    
+    align-items: center;     
     backdrop-filter: blur(0);
     background: linear-gradient(rgb(13, 197, 253), rgba(14, 157, 253, 0.397), rgb(13, 197, 253));
     border-radius: 25px;
     
 }
-.main{
-    display: flex;
 
-}
 .login{
     display: none;
-    height: 350px;
-    width: 420px;
+    height: auto;
+    width: 400x;
 }
 
-.erro-msg{
+.erro-msg{    
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.753);
+    background-color: rgba(0, 255, 0, 0.541);
+    font-size: 18px;
+    font-weight: bold;
+    margin-top:5px;
+    padding: 10px;
+    color: #fff;
+    width: auto;
+    border-radius: 15px;
+    z-index: 1000;
+    animation: fadeIn 0.8s;
     display: none;
-
-
 }
 
 .typing-container {
@@ -115,17 +127,20 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0;
-    font-size: 25px;
+    width: 85%;
+    gap: 5px;
+    font-size: 24px;
     color: var(--secondary-color);
-    font-weight: bold;
+    
 }
 
-.loginform input{
+.loginform input{    
     text-indent: 40px;
     border: none;
-    height: 3.5em;
-    width: 25em;
+    font-size: 20px;
+    height: 46px;
+    width: 100%;
+    max-width: 25em;
     border: 2px solid #fff;
     border-radius: 30px;
     margin: 14px;
@@ -136,8 +151,9 @@ section {
 }
 .input-wrapper{
     display: flex;
+    width: 100%;
     position: relative;
-    flex-direction: column;
+    
 }
 .loginform label{
     position: absolute;
@@ -148,7 +164,8 @@ section {
     text-indent: 40px;
 
 }
-.loginform i{
+
+.loginform i:not(.fa.fa-eye,.fa.fa-eye-slash){
     position: absolute;
     top: 50%;
     left: 7%;
@@ -157,16 +174,21 @@ section {
 }
 .loginform i.fa.fa-eye
 {
-    position: absolute;
     display: none;
-    transform: translate(11.4em,-0.4em);
+    position: absolute;
+    top: 50%;
+    right: 7%;
+    transform: translateY(-50%);
+    transition: 0.2s;
     color: #c0c0c0;
 }
-.fa.fa-eye-slash{
+.loginform i.fa.fa-eye-slash{
     position: absolute;
+    top: 50%;
+    right: 7%;
+    transform: translateY(-50%);
+    transition: 0.2s;
     
-    transform: translate(11.4em,-0.4em);
-    color: #c0c0c0;
 
 }
 .loginform i.fa.fa-eye:active,
@@ -174,12 +196,11 @@ section {
     color: #3e4248;
     
 } 
-.loginform input:focus~.fa.fa-eye,.loginforminput:focus~.fa.fa-eye-slash, 
+.loginform input:focus~.fa.fa-eye,.loginform input:focus~.fa.fa-eye-slash, 
 .loginform input:valid~.fa.fa-eye,.loginform input:focus~.fa.fa-eye-slash{
     position: absolute;
     display: block;
     cursor: pointer;   
-   
 }
 
 .loginform input:focus, 
@@ -201,15 +222,12 @@ section {
     color: black;
 
 }
-
 .loginform input:focus~.fa.fa-user, 
 .loginform input:valid~.fa.fa-user{
     position:absolute;   
     transform: translate(-45px,-50%);
  color: rgb(255, 255, 255);
 }
-
-
 .loginform input:focus~.fa.fa-key, 
 .loginform input:valid~.fa.fa-key{
     position:absolute;   
@@ -235,10 +253,13 @@ section {
 .loginform button:hover {
     background-color: #0056b3;
 }
-#signuplink p{    
+.lbox{
+    margin: 10px;
+}
+#signuplink{    
     cursor: pointer;
 }
-#signuplink p:hover{
+#signuplink:hover{
     color: blue;
     text-decoration: underline;
 }
@@ -253,7 +274,7 @@ section {
     }
 }
 .signup{
-    display: flex;
+    display: none;
     height: 520px;
     width: 420px;
 }
@@ -277,6 +298,7 @@ section {
 
 .signupform input{
     width: 100%;
+    font-size: 18px;
     height: 35px;
     border: none;
     border-radius: 4px;
@@ -306,12 +328,34 @@ section {
     transform: translate(6px,35px);    
     
 }
-.signupform .fa.fa-eye{
+.signupform i.fa.fa-eye{
+    position: absolute;
+    display: none;
+    transform: translate(20px,35px);
+    right: 60px;
+    color: #c0c0c0;
+
+}
+
+.signupform i.fa.fa-eye-slash{
     position: absolute;
     transform: translate(20px,35px);
     right: 60px;
     color: #c0c0c0;
 
+}
+.signupform i.fa.fa-eye:active,
+.signupform i.fa.fa-eye-slash{
+    color: #3e4248;
+    
+} 
+
+.signupform input:focus~.fa.fa-eye,.signupform input:focus~.fa.fa-eye-slash, 
+.signupform input:valid~.fa.fa-eye,.signupform input:focus~.fa.fa-eye-slash{
+    position: absolute;
+    display: block;
+    cursor: pointer;   
+   
 }
 .button-container {
     width: 100%;
@@ -333,12 +377,14 @@ section {
 .button-container button:hover {
     background-color: #0056b3;
 }
-#signinlink p{
+.sbox{
     position: relative; 
-    bottom: -15px;   
+    bottom: -15px;  
+}
+#signinlink{
     cursor: pointer;
 }
-#signinlink p:hover{
+#signinlink:hover{
     color: blue;
     text-decoration: underline;
 }
