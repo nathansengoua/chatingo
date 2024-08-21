@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if the user is already logged in
+if (isset($_SESSION['user_id'])) {
+    // If logged in, redirect to chat.php
+    header('Location: chat.php');
+    exit();
+}
 $pageTitle = 'Login | Signup';
 $pageCss = 'login_signupstyles.css';
 $pageJs = 'loginsignupscript.js';
@@ -11,14 +19,14 @@ include 'includes/header.php';
         <nav>
             <ul>
                 <li><a href="#">About us</a></li>
-                <li><a href="#" id="signuplink">Signup</a></li>
+                <li><a href="#" id="togglelink">Signup</a></li>
             </ul>
         </nav>
     </header>
-<section>
-        <div class="main container">            
+	<section>
+		<div class="main container">            
 			<div class="login container" id="login-wrapper">
-				<div class="erro-msg">hiii</div>
+				<div id="login-erro-msg" class="erro-msg">hiii</div>
 				<div class="typing-container">
 					<p id="typing-text"></p>
 				</div>
@@ -45,8 +53,9 @@ include 'includes/header.php';
 				<div class="lbox">Don't have an acount ? <span id="signuplink">signup</span></div>            
 
 			</div>
+
 			<div class="signup container" id="signup-wrapper">
-				<div class="erro-msg"></div>
+				<div id="signup-erro-msg" class="erro-msg">hii</div>
 				<span class="signuplogo">sign up</span>
 				<form class="signupform">
 					<div class="names">
@@ -87,15 +96,13 @@ include 'includes/header.php';
 				<div class="sbox">already have an acount ? <span id="signinlink">Login</span></div> 
 			</div>
 
-        </div>              
-            
-    </section>
-    
-<?php include 'includes/footer.php' ?>
+			</div>              
+			
+	</section>
 <script src="js/login.js" ></script>
 <script src="js/singup.js" ></script>
 <footer style="text-align: center;">
         <p>&copy; <?php echo date('Y'); ?> My Website. All rights reserved.</p>
-    </footer>
+</footer>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?></title>
     <link rel="stylesheet" href="css/<?php echo $pageCss; ?>">
+    <link rel="stylesheet" href="css/<?php echo $otherstyle; ?>">
     <link rel="stylesheet" href="css/<?php echo $mediaqueryCSS; ?>"> <!-- External media query CSS -->
     <script src="https://kit.fontawesome.com/d6371c7585.js" crossorigin="anonymous"></script>
    

@@ -1,0 +1,43 @@
+@media (max-width: 768px) {
+    #userspanel {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #oldchats,
+    .usersactions,
+    #discusion-container,
+    #usersprofile {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .hamburger-menu {
+        font-size: 30px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    #discusion-container {
+        margin-top: 20px;
+    }
+
+    .three-dots-menu {
+        font-size: 30px;
+    }
+
+    .close-icon {
+        font-size: 20px;
+        margin-left: auto;
+    }
+
+    .usersactions {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+}

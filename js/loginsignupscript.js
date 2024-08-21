@@ -1,54 +1,71 @@
-const text = "Hello, Welcome Back!!";
-const typingTextElement = document.getElementById('typing-text');
-let index = 0;
-let deleting = false;
+    const text = "Hello, Welcome Back!!";
+    const typingTextElement = document.getElementById('typing-text');
+    let index = 0;
+    let deleting = false;
 
-function type() {
-    if (!deleting) {
-        // Typing phase
-        if (index < text.length) {
-            typingTextElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, 100); // Typing speed
+    function type() {
+        if (!deleting) {
+            // Typing phase
+            if (index < text.length) {
+                typingTextElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 100); // Typing speed
+            } else {
+                deleting = true;
+                setTimeout(type, 2000); // Pause before starting to delete
+            }
         } else {
-            deleting = true;
-            setTimeout(type, 2000); // Pause before starting to delete
-        }
-    } else {
-        // Deleting phase
-        if (index > 0) {
-            typingTextElement.textContent = typingTextElement.textContent.slice(0, -1);
-            index--;
-            setTimeout(type, 50); // Deleting speed
-        } else {
-            deleting = false;
-            setTimeout(type, 2000); // Pause before starting to type again
+            // Deleting phase
+            if (index > 0) {
+                typingTextElement.textContent = typingTextElement.textContent.slice(0, -1);
+                index--;
+                setTimeout(type, 50); // Deleting speed
+            } else {
+                deleting = false;
+                setTimeout(type, 2000); // Pause before starting to type again
+            }
         }
     }
-}
 
-// swap script
 document.addEventListener('DOMContentLoaded', function() {
     type();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-   const loginbtn = document.getElementById('signuplink');
-   const signupbtn = document.getElementById('signinlink');
-   const loginpage = document.getElementById('login-wrapper');
-   const signuppage = document.getElementById('signup-wrapper');
+// swap scrip
 
-   signuppage.style.display = 'flex';
-   
-   signupbtn.addEventListener('click', function() {
-    signuppage.style.display = 'none';
+document.addEventListener('DOMContentLoaded', function() {
+    const loginbtn = document.getElementById('signuplink');
+    const signupbtn = document.getElementById('signinlink');
+    const loginpage = document.getElementById('login-wrapper');
+    const signuppage = document.getElementById('signup-wrapper');
+    const toggleLink = document.getElementById('togglelink');
+
     loginpage.style.display = 'flex';
+    toggleLink.textContent = 'Signup';
+    signupbtn.addEventListener('click', function() {
+            signuppage.style.display = 'none';
+            loginpage.style.display = 'flex';
     });
 
     loginbtn.addEventListener('click', function() {
-        loginpage.style.display = 'none';
-        signuppage.style.display = 'flex';
-    });    
+            loginpage.style.display = 'none';
+            signuppage.style.display = 'flex';
+    });
+     
+    
+    toggleLink.addEventListener('click', function() {
+        if (signuppage.style.display === 'none') {
+            // If currently on the login page, switch to the signup page
+            loginpage.style.display = 'none';
+            signuppage.style.display = 'flex';
+            toggleLink.textContent = 'Login'; // Change the link text to "Login"
+        } else {
+            // If currently on the signup page, switch to the login page
+            signuppage.style.display = 'none';
+            loginpage.style.display = 'flex';
+            toggleLink.textContent = 'Signup'; // Change the link text to "Signup"
+        }
+    });
 
 });
 

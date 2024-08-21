@@ -1,31 +1,50 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const errorbox = document.querySelector(".erro-msg");
-    document.querySelector(".signupform").addEventListener('submit', async function(e) {
+    const signupform = document.querySelector(".signupform");
+    const errorbox = document.getElementById('signup-erro-msg');
+
+    signupform.addEventListener('submit', async function(e) {
         e.preventDefault();
-    
+
         const formData = new FormData(this);
         try {
             const response = await fetch('php/signupsubmit.php', {
                 method: 'POST',
                 body: formData
             });
-        
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
             const result = await response.json();
-            errorbox.style.display = "flex";
-            errorbox.textContent = result.message;
-            
+
             if (result.status === 'success') {
-                alert('Registration successful!');
+                alert("success");
+                errorbox.style.display = "flex";
+                errorbox.style.backgroundColor = "rgba(0, 255, 0, 0.541)";
+                errorbox.textContent = result.message;
                 setTimeout(() => {
-                    window.location.href = "chat.php";
-                }, 1000);  // Adding a delay to ensure the message is seen before redirect
+                    errorbox.style.display = "none";
+                }, 2000);
+                setTimeout(() => {
+                    window.location.href = 'chat.php';
+                }, 1000);  // Optional: Delay redirection to show the success message
             } else {
-                alert(result.message);
+                errorbox.style.display = "flex";
+                errorbox.style.backgroundColor = "rgba(255, 0, 0, 0.753)";
+                errorbox.textContent = result.message;
+                setTimeout(() => {
+                    errorbox.style.display = "none";
+                }, 2000);
             }
         } catch (error) {
-            errorbox.style.display = "flex";
-            errorbox.textContent = "An unexpected error occurred. Please try again.";
             console.error("Error during signup:", error);
+            errorbox.style.display = "flex";
+            errorbox.style.backgroundColor = "rgba(255, 0, 0, 0.753)";
+            errorbox.textContent = "An error occurred during signup.";
+            setTimeout(() => {
+                errorbox.style.display = "none";
+            }, 2000);
         }
     });
 });
